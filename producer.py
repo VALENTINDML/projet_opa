@@ -3,14 +3,14 @@ import json
 import time 
 from kafka import KafkaProducer
 
-Kafka_producer = KafkaProducer(bootstrap_servers= '54.154.204.98:8080' ,
-value_serializer= lambda v: json.dumps(v).encode('utf-8')
+Kafka_producer = KafkaProducer(bootstrap_servers= '54.154.204.98:8080' , # "localhost:8080"
+value_serializer= lambda v: json.dumps(v).encode('utf-8')) 
 
 def on_message(ws, message):
     try:
         data = json.loads(message)
         if "T" in data:
-            insert_trade(data)
+            Kafka_producer.send('Binance_trades', value=data)
     except Exception as e:
         print(f"❌ Erreur dans on_message : {e}")
 
@@ -19,7 +19,7 @@ def on_error(ws, error):
 
 def on_close(ws, close_status_code, close_msg):
     print(f"🔌 Fermeture : {close_status_code}, {close_msg}")
-    conn.close()
+    ws.close()
 
 def on_open(ws):
     print("🔗 Connexion WebSocket établie")
@@ -46,3 +46,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("⏹️ Arrêt manuel")
         ws.close()
+

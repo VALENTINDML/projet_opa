@@ -25,7 +25,7 @@ if not csv_path.exists():
         writer.writerow(['symbol', 'price', 'quantity', 'timestamp'])
 
 consumer = KafkaConsumer( 'Binance_trades' , bootstrap_servers = '18.203.161.161:8080/',
-value_deserialize= lambda m: json.loads(m).decode('utf-8') , auto_offset_reset= 'latest', 
+value_deserializer= lambda m: json.loads(m).decode('utf-8') , auto_offset_reset= 'latest', 
 group_id= 'bianance-consumer')
 
 def insert_trade(data):
@@ -50,3 +50,7 @@ def insert_trade(data):
             writer = csv.writer(f)
             writer.writerow([data["s"], data["p"], data["q"], formatted_time])
         last_saved_time = current_time
+
+for message in consumer:
+    data = message.value  # Le message est un dictionnaire après désérialisation
+    insert_trade(data)
