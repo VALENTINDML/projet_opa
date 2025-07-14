@@ -30,7 +30,7 @@ services:
 
   producer: 
     build: 
-      context: /home/ubuntu/opa_env/projet_opa
+      context: .
       dockerfile: Dockerfile
     depends_on :
       - kafka
@@ -40,7 +40,7 @@ services:
         
   consumer: 
     build: 
-      context: /home/ubuntu/opa_env/projet_opa
+      context: .
       dockerfile: Dockerfile
     depends_on :
       - kafka
@@ -54,7 +54,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: VALDML
-      POSTGRES_PASSWORD: 12+14=32+89cestfaux!!
+      POSTGRES_PASSWORD: "A remplir"
       POSTGRES_DB: binance_data
     ports:
       - "5433:5432"
@@ -70,7 +70,7 @@ services:
 
   jupyter:
     build:
-      context: /home/ubuntu/opa_env/projet_opa
+      context: .
       dockerfile: Dockerfile
     ports:
       - "8888:8888" 
@@ -83,7 +83,7 @@ services:
 
   fastapi:
     build:
-      context: /home/ubuntu/opa_env/projet_opa
+      context: .
       dockerfile: Dockerfile
     ports:
         - "8000:8000"

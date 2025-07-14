@@ -1,8 +1,15 @@
 # Utiliser une image officielle Python légère
-FROM python:3.11-slim
+FROM python:3.10-buster
 
 # Installer les outils de compilation nécessaires pour scikit-learn
 #RUN apt add --no-cache build-base gcc musl-dev python3-dev
+
+# Installer les dépendances système nécessaires pour kafka-python
+RUN apt-get update && apt-get install -y \
+    librdkafka-dev
+
+# Mettre à jour pip
+RUN pip install --upgrade pip
 
 # Définit le dossier de travail dans le conteneur
 WORKDIR /app

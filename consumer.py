@@ -24,9 +24,12 @@ if not csv_path.exists():
         writer = csv.writer(f)
         writer.writerow(['symbol', 'price', 'quantity', 'timestamp'])
 
-consumer = KafkaConsumer( 'Binance_trades' , bootstrap_servers = '3.249.100.92:8080/',
-value_deserializer= lambda m: json.loads(m).decode('utf-8') , auto_offset_reset= 'latest', 
-group_id= 'bianance-consumer')
+# Intégration consumer Kafka
+consumer = KafkaConsumer( 'Binance_trades' , 
+bootstrap_servers = '3.249.100.92:8080/',
+value_deserializer= lambda m: json.loads(m).decode('utf-8') , 
+auto_offset_reset= 'latest', 
+group_id= 'bianance-consumer') 
 
 def insert_trade(data):
     try:

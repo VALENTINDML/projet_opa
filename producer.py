@@ -10,7 +10,7 @@ def on_message(ws, message):
     try:
         data = json.loads(message)
         if "T" in data:
-            Kafka_producer.send('Binance_trades', value=data)
+            Kafka_producer.send('Binance_trades', value=data) #Envoi d'un message au topic Binance_trades
     except Exception as e:
         print(f"❌ Erreur dans on_message : {e}")
 
