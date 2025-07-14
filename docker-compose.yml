@@ -12,7 +12,7 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 54.154.204.98
+      KAFKA_ADVERTISED_HOST_NAME: 3.249.100.92
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -30,7 +30,7 @@ services:
 
   producer: 
     build: 
-      context: ./projet_opa
+      context: /home/ubuntu/opa_env/projet_opa
       dockerfile: Dockerfile
     depends_on :
       - kafka
@@ -40,7 +40,7 @@ services:
         
   consumer: 
     build: 
-      context: ./projet_opa
+      context: /home/ubuntu/opa_env/projet_opa
       dockerfile: Dockerfile
     depends_on :
       - kafka
@@ -70,7 +70,7 @@ services:
 
   jupyter:
     build:
-      context: ./projet_opa
+      context: /home/ubuntu/opa_env/projet_opa
       dockerfile: Dockerfile
     ports:
       - "8888:8888" 
@@ -83,7 +83,7 @@ services:
 
   fastapi:
     build:
-      context: ./projet_opa
+      context: /home/ubuntu/opa_env/projet_opa
       dockerfile: Dockerfile
     ports:
         - "8000:8000"

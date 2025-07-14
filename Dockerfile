@@ -7,9 +7,6 @@ FROM python:3.11-slim
 # Définit le dossier de travail dans le conteneur
 WORKDIR /app
 
-# Copier les fichiers nécessaires pour ton projet dans le conteneur
-COPY ./projet_opa /app
-
 # Copier le fichier requirements.txt dans le conteneur
 COPY requirements.txt .
 
@@ -17,7 +14,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier tout le code de l'application dans le conteneur
-COPY . .
+# Copier les fichiers nécessaires pour ton projet dans le conteneur
+COPY ./ /app
 
 # Commande pour lancer FastAPI avec uvicorn
 #CMD ["uvicorn", "fast_api:app", "--host", "0.0.0.0", "--port", "8000"]

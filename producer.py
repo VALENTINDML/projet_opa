@@ -3,7 +3,7 @@ import json
 import time 
 from kafka import KafkaProducer
 
-Kafka_producer = KafkaProducer(bootstrap_servers= '54.154.204.98:8080' , # "localhost:8080"
+Kafka_producer = KafkaProducer(bootstrap_servers= '3.249.100.92:8080' , # "localhost:8080"
 value_serializer= lambda v: json.dumps(v).encode('utf-8')) 
 
 def on_message(ws, message):
