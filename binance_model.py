@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 from pathlib import Path
+import datetime
 
 !where
 
@@ -14,7 +15,7 @@ from pathlib import Path
 today = datetime.datetime.now().strftime("%Y-%m-%d")
 csv_path = Path(f"binance_trades_{today}.csv") # Mise en place d'un nouveau fichier charque jours si il existe
 
-if csv_path.exist():
+if csv_path.exists():
     df = pd.read_csv(csv_path)
     print(f"Le fichier {csv_path} à été chargé") # Condition pour entrainer le modele
 
